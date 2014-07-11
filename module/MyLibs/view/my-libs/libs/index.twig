@@ -1,0 +1,108 @@
+{% extends 'layout/layout.twig' %}
+{% block content %}
+<div id="page">
+    <div class="libs-list">
+        <form method="post" action="">
+            <select name="lib_id">
+                <option value="-1"> -- Выберите библиотеку -- </option>
+            {% for lib in libs %}
+                {% if lib_id == lib['id'] %}
+                <option value="{{ lib['id'] }}" selected="selected">{{ lib['title'] }}</option>
+                {% else %}
+                <option value="{{ lib['id'] }}">{{ lib['title'] }}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+            <input type="submit" value="Фильтр" name="">
+        </form>
+    </div>
+    <div class="books-list">
+        {% for book in books %}
+            <div class="bookBox">
+                <div class="bookBox_inner">
+                    <div class="book_name">
+                        {{ book['title'] }}
+                    </div>
+                    <div class="book_image">
+                        <img src="img/books/example.jpg" align="none" alt="Example" title="Example">
+                    </div>
+                    <div class="book_price">{{ book['price'] }} руб.</div>
+                    <div class="clear"></div>
+                    <div class="book_author">{{ book['author'] }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="libs-add">
+        <h3>Добавить библиотеку</h3>
+        <table width="80%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td class="label-add"><b>Название библиотеки:</b></td>
+                    <td>
+                        <input type="text" value="" name="lib_name" class="input_field">
+                        <span class="errors" id="lib_name_error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-add"><b>Описание библиотеки:</b></td>
+                    <td>
+                        <textarea rows="7" cols="40" name="lib_desc" class="textarea_field"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="buttons">
+                        <input type="button" name="" value="Добавить" class="button">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="books-add">
+        <h3>Добавить книгу</h3>
+        <table width="80%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td class="label-add"><b>Название книги:</b></td>
+                    <td>
+                        <input type="text" value="" name="book_name" class="input_field">
+                        <span class="errors" id="book_name_error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-add"><b>Автор книги:</b></td>
+                    <td>
+                        <input type="text" value="" name="book_author" class="input_field">
+                        <span class="errors" id="book_author_error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-add"><b>Библиотека:</b></td>
+                    <td>
+                        <select name="libs_id">
+                        {% for lib in libs %}
+                            <option value="{{ lib['id'] }}">{{ lib['title'] }}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-add"><b>Цена:</b></td>
+                    <td>
+                        <input type="text" value="" name="book_price" class="input_field">
+                        <span class="errors" id="book_price_error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="buttons">
+                        <input type="button" name="" value="Добавить" class="button">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{% endblock content %}
